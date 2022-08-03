@@ -1,10 +1,10 @@
 --[DEBUGGING HELPER FUNCTIONS]--
 DebugTimerID	= 0
-if(Property["Debug Mode"] == "OFF") then
-	DebugPrint	= false
-else
+--(Property["Debug Mode"] == "OFF") then
+--ebugPrint	= false
+--se
 	DebugPrint	= true
-end
+--d
 --C4:UpdateProperty("Debug Mode", "ON")
 
 function StartDebugTimer()
