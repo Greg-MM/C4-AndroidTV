@@ -1,0 +1,1036 @@
+<devicedata>
+  <copyright>2022</copyright>
+  <manufacturer>AndroidTV</manufacturer>
+  <name>AndroidTV</name>
+  <model>AndroidTV</model>
+  <creator>Greg Moerler</creator>
+  <created>08/01/2022 12:00 PM</created>
+  <modified>08/02/2022 7:21 PM</modified>
+  <version>1</version>
+  <control>lua_gen</control>
+  <driver>DriverWorks</driver>
+  <small image_source="c4z">icons/device_sm.png</small>
+  <large image_source="c4z">icons/device_lg.png</large>
+  <config>
+    <script file="driver.lua"></script>
+    <identify_text>Set the Android TV Device to a static IP / DHCP reservation.</identify_text>
+    <identify_image>www/icons/identify_image.gif</identify_image>
+    <properties>
+      <property>
+        <name>Driver Version</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>true</readonly>
+      </property>
+      <property>
+        <name>Connection</name>
+        <type>LIST</type>
+        <items>
+          <item>ONLINE</item>
+          <item>OFFLINE</item>
+        </items>
+        <default>OFFLINE</default>
+        <readonly>true</readonly>
+      </property>
+      
+      <property>
+         <name>DeviceStatusHeader</name>
+         <type>LABEL</type>
+        <default>Device Status</default>
+      </property>
+      
+      <property>
+        <name>Power Status</name>
+        <type>STRING</type>
+        <default>?</default>
+        <readonly>true</readonly>
+      </property>
+      <property>
+        <name>Current App</name>
+        <type>STRING</type>
+        <default>?</default>
+        <readonly>true</readonly>
+      </property>
+      <property>
+        <name>Model Name</name>
+        <type>STRING</type>
+        <default>?</default>
+        <readonly>true</readonly>
+      </property>
+      <property>
+        <name>Vendor Name</name>
+        <type>STRING</type>
+        <default>?</default>
+        <readonly>true</readonly>
+      </property>
+      <property>
+        <name>Device Version</name>
+        <type>STRING</type>
+        <default>?</default>
+        <readonly>true</readonly>
+      </property>
+      <property>
+        <name>Device Package Name</name>
+        <type>STRING</type>
+        <default>?</default>
+        <readonly>true</readonly>
+      </property>
+      <property>
+        <name>Device App Version</name>
+        <type>STRING</type>
+        <default>?</default>
+        <readonly>true</readonly>
+      </property>
+      <property>
+        <name>Device Public Key Modulus</name>
+        <type>STRING</type>
+        <default></default>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Device Public Key Exponent</name>
+        <type>RANGED_INTEGER</type>
+        <default>65537</default>
+        <minimum>0</minimum>
+        <maximum>65537</maximum>
+      </property>
+      <property>
+        <name>On Room OFF</name>
+        <type>LIST</type>
+        <items>
+          <item>Do Nothing</item>
+          <item>Pause</item>
+        </items>
+        <default>Do Nothing</default>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Debug Mode</name>
+        <type>LIST</type>
+        <items>
+          <item>OFF</item>
+          <item>ON</item>
+        </items>
+        <default>OFF</default>
+        <readonly>false</readonly>
+      </property>
+      
+      
+      <property>
+         <name>LaunchAppHeader</name>
+         <type>LABEL</type>
+        <default>Launch App URLs</default>
+      </property>
+      <property>
+        <name>Launch App URL 1</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 2</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 3</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 4</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 5</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 6</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 7</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 8</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 9</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 10</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 11</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 12</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 13</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 14</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 15</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 16</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 17</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 18</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 19</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      <property>
+        <name>Launch App URL 20</name>
+        <default></default>
+        <type>STRING</type>
+        <readonly>false</readonly>
+      </property>
+      
+      <property>
+         <name>KeyMapHeader</name>
+         <type>LABEL</type>
+        <default>Key Mapping</default>
+      </property>
+      
+      
+      <property>
+        <name>GUIDE Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>172</default>
+      </property>
+      <property>
+        <name>PAGE UP Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>92</default>
+      </property>
+      <property>
+        <name>PAGE DOWN Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>93</default>
+      </property>
+      <property>
+        <name>UP Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>19</default>
+      </property>
+      <property>
+        <name>DOWN Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>20</default>
+      </property>
+      <property>
+        <name>LEFT Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>21</default>
+      </property>
+      <property>
+        <name>RIGHT Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>22</default>
+      </property>
+      <property>
+        <name>ENTER Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>23</default>
+      </property>
+      <property>
+        <name>PREVIOUS CHANNEL Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>229</default>
+      </property>
+      <property>
+        <name>CHANNEL UP Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>166</default>
+      </property>
+      <property>
+        <name>CHANNEL DOWN Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>167</default>
+      </property>
+      <property>
+        <name>INFO Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>165</default>
+      </property>
+      <property>
+        <name>MENU Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>82</default>
+      </property>
+      <property>
+        <name>CANCEL Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>4</default>
+      </property>
+      <property>
+        <name>DVR Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>173</default>
+      </property>
+      <property>
+        <name>REWIND Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>89</default>
+      </property>
+      <property>
+        <name>FAST FORWARD Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>90</default>
+      </property>
+      <property>
+        <name>SKIP BACKWARD Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>273</default>
+      </property>
+      <property>
+        <name>SKIP FORWARD Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>272</default>
+      </property>
+      <property>
+        <name>PLAY Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>126</default>
+      </property>
+      <property>
+        <name>PAUSE Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>127</default>
+      </property>
+      <property>
+        <name>PAUSE_ROOM_OFF Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>127</default>
+        <tooltip>Testing Tool Tip</tooltip>
+        <description>Key Mapping used when 'On Room OFF' is 'PAUSE', should be discrete and not a play/pause toggle like you might want for the normal button</description>
+      </property>
+      <property>
+        <name>RECORD Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>130</default>
+      </property>
+      <property>
+        <name>STOP Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>86</default>
+      </property>
+      <property>
+        <name>RED Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>183</default>
+      </property>
+      <property>
+        <name>GREEN Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>184</default>
+      </property>
+      <property>
+        <name>YELLOW Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>185</default>
+      </property>
+      <property>
+        <name>BLUE Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>186</default>
+      </property>
+      <property>
+        <name>1 Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>8</default>
+      </property>
+      <property>
+        <name>2 Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>9</default>
+      </property>
+      <property>
+        <name>3 Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>10</default>
+      </property>
+      <property>
+        <name>4 Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>11</default>
+      </property>
+      <property>
+        <name>5 Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>12</default>
+      </property>
+      <property>
+        <name>6 Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>13</default>
+      </property>
+      <property>
+        <name>7 Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>14</default>
+      </property>
+      <property>
+        <name>8 Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>15</default>
+      </property>
+      <property>
+        <name>9 Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>16</default>
+      </property>
+      <property>
+        <name>0 Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>7</default>
+      </property>
+      <property>
+        <name>* Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>17</default>
+      </property>
+      <property>
+        <name># Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>18</default>
+      </property>
+      <property>
+        <name>INPUT Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>0</default>
+      </property>
+      <property>
+        <name>CLOSED CAPTIONING Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>1000</maximum>
+        <default>175</default>
+      </property>
+            
+      
+  
+      
+    </properties>
+    <documentation file="www/documentation.rtf"></documentation>
+    <power_management_method>DiscreteCodes</power_management_method>
+    <power_delay>0</power_delay>
+    <power_command_delay>0</power_command_delay>
+    <power_command_needed>True</power_command_needed>
+    <actions>
+      <action>
+        <name>Test Command URL</name>
+        <command>TestURL</command>
+        <params>
+          <param>
+            <name>URL</name>
+            <type>STRING</type>
+            <default></default>
+          </param>
+        </params>
+      </action>
+      <action>
+        <name>Test KeyCode - Press Then Release</name>
+        <command>TestKeyCodePressThenRelease</command>
+        <params>
+          <param>
+            <name>KeyCode</name>
+            <type>RANGED_INTEGER</type>
+            <default>0</default>
+            <minimum>0</minimum>
+            <maximum>1000</maximum>
+          </param>
+        </params>
+      </action>
+      <action>
+        <name>Test KeyCode - Send Code</name>
+        <command>TestKeyCodeSend</command>
+        <params>
+          <param>
+            <name>KeyCode</name>
+            <type>RANGED_INTEGER</type>
+            <default>0</default>
+            <minimum>0</minimum>
+            <maximum>1000</maximum>
+          </param>
+        </params>
+      </action>
+      <action>
+        <name>Disconnect From Command Interface</name>
+        <command>DisconnectFromCommand</command>
+      </action>
+      <action>
+        <name>Connect To Command Interface</name>
+        <command>ConnectToCommand</command>
+      </action>
+      <action>
+        <name>Finish Pairing Android TV Device</name>
+        <command>FinishPair</command>
+        <params>
+          <param>
+            <name>PAIRING_CODE</name>
+            <type>STRING</type>
+            <default></default>
+          </param>
+        </params>
+      </action>
+      <action>
+        <name>Begin Pairing Android TV Device</name>
+        <command>BeginPair</command>
+      </action>
+    </actions>
+  </config>
+  <composer_categories>
+    <category>Audio/Video</category>
+  </composer_categories>
+  <OnlineCategory>media_player</OnlineCategory>
+  <proxies qty="2">
+    <proxy proxybindingid="5001" name="Android Device" large_image="icons/device_lg.png" small_image="icons/device_sm.png" smimagepath="icons\device_sm.png" lgimagepath="icons\device_lg.png" image_source="c4z">cable</proxy>
+    <proxy proxybindingid="5002" name="Android Device App Switcher" large_image="icons/switch_device_lg.png" small_image="icons/switch_device_sm.png" smimagepath="icons\switch_device_sm.png" lgimagepath="icons\switch_device_lg.png" image_source="c4z">avswitch</proxy>
+  </proxies>
+  <events>
+    <event>
+      <id>1</id>
+      <name>App Changed</name>
+      <description>Current Android TV App Changed</description>
+    </event>
+    <event>
+      <id>601</id>
+      <name>Key Mappint Event 1</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>602</id>
+      <name>Key Mappint Event 2</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>603</id>
+      <name>Key Mappint Event 3</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>604</id>
+      <name>Key Mappint Event 4</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>605</id>
+      <name>Key Mappint Event 5</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>606</id>
+      <name>Key Mappint Event 6</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>607</id>
+      <name>Key Mappint Event 7</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>608</id>
+      <name>Key Mappint Event 8</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>609</id>
+      <name>Key Mappint Event 9</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>610</id>
+      <name>Key Mappint Event 10</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>611</id>
+      <name>Key Mappint Event 11</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>612</id>
+      <name>Key Mappint Event 12</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>613</id>
+      <name>Key Mappint Event 13</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>614</id>
+      <name>Key Mappint Event 14</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>615</id>
+      <name>Key Mappint Event 15</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>616</id>
+      <name>Key Mappint Event 16</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>617</id>
+      <name>Key Mappint Event 17</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>618</id>
+      <name>Key Mappint Event 18</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>619</id>
+      <name>Key Mappint Event 19</name>
+      <description>Key Mapping Event</description>
+    </event>
+    <event>
+      <id>620</id>
+      <name>Key Mappint Event 20</name>
+      <description>Key Mapping Event</description>
+    </event>
+  </events>
+  <connections>
+    <connection proxybindingid="5001">
+      <id>6001</id>
+      <facing>6</facing>
+      <connectionname>Android TV Remote SSL</connectionname>
+      <type>4</type>
+      <consumer>true</consumer>
+      <classes>
+        <class>
+          <classname>SSL</classname>
+          <ports>
+            <port>
+              <number>6466</number>
+              <auto_connect>False</auto_connect>
+              <monitor_connection>False</monitor_connection>
+              <keep_connection>False</keep_connection>
+              <certificate>./AndroidTV.p12</certificate>
+              <private_key protected="True">./AndroidTV.p12</private_key>
+              <verify_mode>none</verify_mode>
+              <method>tlsv1</method>
+            </port>
+            <port>
+              <number>6467</number>
+              <auto_connect>False</auto_connect>
+              <monitor_connection>False</monitor_connection>
+              <keep_connection>False</keep_connection>
+              <certificate>./AndroidTV.p12</certificate>
+              <private_key protected="True">./AndroidTV.p12</private_key>
+              <verify_mode>none</verify_mode>
+              <method>tlsv1</method>
+            </port>
+          </ports>
+        </class>
+      </classes>
+    </connection>
+    <connection>
+      <id>5001</id>
+      <type>2</type>
+      <connectionname>Control4 UI</connectionname>
+      <consumer>False</consumer>
+      <linelevel>False</linelevel>
+      <classes>
+        <class>
+          <classname>SATELLITE</classname>
+        </class>
+      </classes>
+    </connection>
+    <connection>
+      <id>5002</id>
+      <type>2</type>
+      <connectionname>AVSWITCH</connectionname>
+      <consumer>False</consumer>
+      <linelevel>True</linelevel>
+      <classes>
+        <class>
+          <classname>AVSWITCH</classname>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5001">
+      <id>1101</id>
+      <type>5</type>
+      <connectionname>Video From Mini Drivers</connectionname>
+      <consumer>True</consumer>
+      <linelevel>True</linelevel>
+      <idautobind>10</idautobind>
+      <hidden>True</hidden>
+      <classes>
+        <class>
+          <classname>COMPONENT</classname>
+          <autobind>true</autobind>
+        </class>
+        <class>
+          <classname>HDMI</classname>
+          <autobind>true</autobind>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5001">
+      <id>3101</id>
+      <type>6</type>
+      <connectionname>Audio From Mini Drivers</connectionname>
+      <consumer>True</consumer>
+      <linelevel>True</linelevel>
+      <idautobind>20</idautobind>
+      <hidden>True</hidden>
+      <classes>
+        <class>
+          <classname>STEREO</classname>
+          <autobind>true</autobind>
+        </class>
+        <class>
+          <classname>DIGITAL_COAX</classname>
+          <autobind>true</autobind>
+        </class>
+        <class>
+          <classname>DIGITAL_OPTICAL</classname>
+          <autobind>true</autobind>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5002">
+      <id>2110</id>
+      <type>5</type>
+      <connectionname>Video From Mini Drivers</connectionname>
+      <consumer>False</consumer>
+      <linelevel>True</linelevel>
+      <idautobind>10</idautobind>
+      <hidden>True</hidden>
+      <classes>
+        <class>
+          <classname>COMPONENT</classname>
+          <autobind>true</autobind>
+        </class>
+        <class>
+          <classname>HDMI</classname>
+          <autobind>true</autobind>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5002">
+      <id>4110</id>
+      <type>6</type>
+      <connectionname>Audio From Mini Drivers</connectionname>
+      <consumer>False</consumer>
+      <linelevel>True</linelevel>
+      <idautobind>20</idautobind>
+      <hidden>True</hidden>
+      <classes>
+        <class>
+          <classname>STEREO</classname>
+          <autobind>true</autobind>
+        </class>
+        <class>
+          <classname>DIGITAL_COAX</classname>
+          <autobind>true</autobind>
+        </class>
+        <class>
+          <classname>DIGITAL_OPTICAL</classname>
+          <autobind>true</autobind>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5001">
+      <id>2000</id>
+      <type>5</type>
+      <connectionname>AV Out</connectionname>
+      <consumer>False</consumer>
+      <linelevel>True</linelevel>
+      <classes>
+        <class>
+          <classname>COMPOSITE</classname>
+        </class>
+        <class>
+          <classname>HDMI</classname>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5001">
+      <id>4000</id>
+      <type>6</type>
+      <connectionname>AV Out</connectionname>
+      <consumer>False</consumer>
+      <linelevel>True</linelevel>
+      <classes>
+        <class>
+          <classname>STEREO</classname>
+        </class>
+        <class>
+          <classname>DIGITAL_OPTICAL</classname>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5002">
+      <id>3101</id>
+      <type>5</type>
+      <connectionname>App 1</connectionname>
+      <consumer>True</consumer>
+      <linelevel>False</linelevel>
+      <classes>
+        <class>
+          <classname>RF_MINI_APP</classname>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5002">
+      <id>3102</id>
+      <type>5</type>
+      <connectionname>App 2</connectionname>
+      <consumer>True</consumer>
+      <linelevel>False</linelevel>
+      <classes>
+        <class>
+          <classname>RF_MINI_APP</classname>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5002">
+      <id>3103</id>
+      <type>5</type>
+      <connectionname>App 3</connectionname>
+      <consumer>True</consumer>
+      <linelevel>False</linelevel>
+      <classes>
+        <class>
+          <classname>RF_MINI_APP</classname>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5002">
+      <id>3104</id>
+      <type>5</type>
+      <connectionname>App 4</connectionname>
+      <consumer>True</consumer>
+      <linelevel>False</linelevel>
+      <classes>
+        <class>
+          <classname>RF_MINI_APP</classname>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5002">
+      <id>3105</id>
+      <type>5</type>
+      <connectionname>App 5</connectionname>
+      <consumer>True</consumer>
+      <linelevel>False</linelevel>
+      <classes>
+        <class>
+          <classname>RF_MINI_APP</classname>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5002">
+      <id>3106</id>
+      <type>5</type>
+      <connectionname>App 6</connectionname>
+      <consumer>True</consumer>
+      <linelevel>False</linelevel>
+      <classes>
+        <class>
+          <classname>RF_MINI_APP</classname>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5002">
+      <id>3107</id>
+      <type>5</type>
+      <connectionname>App 7</connectionname>
+      <consumer>True</consumer>
+      <linelevel>False</linelevel>
+      <classes>
+        <class>
+          <classname>RF_MINI_APP</classname>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5002">
+      <id>3108</id>
+      <type>5</type>
+      <connectionname>App 8</connectionname>
+      <consumer>True</consumer>
+      <linelevel>False</linelevel>
+      <classes>
+        <class>
+          <classname>RF_MINI_APP</classname>
+        </class>
+      </classes>
+    </connection>
+    <connection proxybindingid="5002">
+      <id>3109</id>
+      <type>5</type>
+      <connectionname>App 9</connectionname>
+      <consumer>True</consumer>
+      <linelevel>False</linelevel>
+      <classes>
+        <class>
+          <classname>RF_MINI_APP</classname>
+        </class>
+      </classes>
+    </connection>
+  </connections>
+  <controlmethod>ip</controlmethod>
+  <capabilities>
+    <audio_consumer_count>0</audio_consumer_count>
+    <audio_provider_count>1</audio_provider_count>
+    <can_be_dvr>False</can_be_dvr>
+    <has_channel_up_down>True</has_channel_up_down>
+    <has_discrete_channel_select>True</has_discrete_channel_select>
+    <has_toad_input_select>False</has_toad_input_select>
+    <video_consumer_count>0</video_consumer_count>
+    <video_provider_count>1</video_provider_count>
+    <navigator_display_option proxybindingid="5001">
+      <display_icons>
+        <Icon height="300" width="300">controller://driver/AndroidTV/icons/experience_300.png</Icon>
+        <Icon height="90" width="90">controller://driver/AndroidTV/icons/experience_90.png</Icon>
+        <Icon height="70" width="70">controller://driver/AndroidTV/icons/experience_70.png</Icon>
+      </display_icons>
+    </navigator_display_option>
+  </capabilities>
+</devicedata>

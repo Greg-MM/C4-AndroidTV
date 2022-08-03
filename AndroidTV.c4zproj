@@ -1,0 +1,13 @@
+﻿<Driver type="c4z" name="AndroidTV">
+ <Items>
+  <Item type="dir" c4zDir="www" name="www" recurse="true" exclude="false" />
+  <Item type="file" name="AndroidTV.p12" />
+  <Item type="file" name="debugging.lua" />
+  <Item type="file" name="driver.lua" />
+  <Item type="file" name="driver.xml" />
+  <Item type="file" name="helpers.lua" />
+  <Item type="file" name="keycodes.lua" />
+  <Item type="file" name="protobuf.lua" />
+  <Item type="file" name="pairing.lua" />
+ </Items>
+</Driver>
