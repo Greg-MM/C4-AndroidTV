@@ -68,6 +68,12 @@
         <readonly>true</readonly>
       </property>
       <property>
+        <name>Mac Address</name>
+        <type>STRING</type>
+        <default>?</default>
+        <readonly>true</readonly>
+      </property>
+      <property>
         <name>Device Package Name</name>
         <type>STRING</type>
         <default>?</default>
@@ -604,6 +610,10 @@
       <action>
         <name>Begin Pairing Android TV Device</name>
         <command>BeginPair</command>
+      </action>
+      <action>
+        <name>Send WOL</name>
+        <command>SendWOL</command>
       </action>
     </actions>
   </config>

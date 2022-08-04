@@ -269,6 +269,8 @@ function OnConnectionStatusChanged(BindingID, nPort, strStatus)
 		if(nPort == 6467) then
 			Pairing_SendRequest()
 		end
+		local mac = C4:GetDeviceMAC (6001)
+		C4:UpdateProperty("Mac Address", mac)
 	end
 	if(nPort == 6466) then
 			C4:UpdateProperty("Connection", strStatus)
@@ -465,7 +467,24 @@ function LUA_ACTION.TestKeyCodePressThenRelease(tQueryParams)
 	SendKey_PRESS_AND_RELEASE(tonumber(tQueryParams.KeyCode))
 end
 
+function LUA_ACTION.SendWOL(tQueryParams)
+	print("Sending Magic Packet...")
+	SendMagicPacket()
+	
+end
 
+
+function SendMagicPacket()
+	print("Sending Magic Packet...")
+	-- Get MacAddress from Properties
+	local MacAddress = Properties["Mac Address"]
+	if (MacAddress ~= "?") then
+		-- replace : with "" in mac address
+		local mac = string.gsub(MacAddress, ":", "")
+		Debug("Sending Magic Packet to " .. mac)
+		C4:SendWOL(mac)
+	end
+end
 
 function GetPrivateKeyPassword(Binding, Port)
 	--Open Source, Key is not secret, might look into generating a self signed certificate in driver
