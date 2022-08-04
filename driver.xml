@@ -5,7 +5,7 @@
   <model>AndroidTV</model>
   <creator>Greg Moerler</creator>
   <created>08/01/2022 12:00 PM</created>
-  <modified>08/02/2022 7:21 PM</modified>
+  <modified>08/03/2022 9:54 PM</modified>
   <version>1</version>
   <control>lua_gen</control>
   <driver>DriverWorks</driver>
@@ -32,13 +32,11 @@
         <default>OFFLINE</default>
         <readonly>true</readonly>
       </property>
-      
       <property>
-         <name>DeviceStatusHeader</name>
-         <type>LABEL</type>
+        <name>DeviceStatusHeader</name>
+        <type>LABEL</type>
         <default>Device Status</default>
       </property>
-      
       <property>
         <name>Power Status</name>
         <type>STRING</type>
@@ -114,11 +112,9 @@
         <default>OFF</default>
         <readonly>false</readonly>
       </property>
-      
-      
       <property>
-         <name>LaunchAppHeader</name>
-         <type>LABEL</type>
+        <name>LaunchAppHeader</name>
+        <type>LABEL</type>
         <default>Launch App URLs</default>
       </property>
       <property>
@@ -241,14 +237,11 @@
         <type>STRING</type>
         <readonly>false</readonly>
       </property>
-      
       <property>
-         <name>KeyMapHeader</name>
-         <type>LABEL</type>
+        <name>KeyMapHeader</name>
+        <type>LABEL</type>
         <default>Key Mapping</default>
       </property>
-      
-      
       <property>
         <name>GUIDE Mapping</name>
         <type>RANGED_INTEGER</type>
@@ -545,10 +538,6 @@
         <maximum>1000</maximum>
         <default>175</default>
       </property>
-            
-      
-  
-      
     </properties>
     <documentation file="www/documentation.rtf"></documentation>
     <power_management_method>DiscreteCodes</power_management_method>
@@ -634,102 +623,102 @@
     </event>
     <event>
       <id>601</id>
-      <name>Key Mappint Event 1</name>
+      <name>Key Mapping Event 01</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>602</id>
-      <name>Key Mappint Event 2</name>
+      <name>Key Mapping Event 02</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>603</id>
-      <name>Key Mappint Event 3</name>
+      <name>Key Mapping Event 03</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>604</id>
-      <name>Key Mappint Event 4</name>
+      <name>Key Mapping Event 04</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>605</id>
-      <name>Key Mappint Event 5</name>
+      <name>Key Mapping Event 05</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>606</id>
-      <name>Key Mappint Event 6</name>
+      <name>Key Mapping Event 06</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>607</id>
-      <name>Key Mappint Event 7</name>
+      <name>Key Mapping Event 07</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>608</id>
-      <name>Key Mappint Event 8</name>
+      <name>Key Mapping Event 08</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>609</id>
-      <name>Key Mappint Event 9</name>
+      <name>Key Mapping Event 09</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>610</id>
-      <name>Key Mappint Event 10</name>
+      <name>Key Mapping Event 10</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>611</id>
-      <name>Key Mappint Event 11</name>
+      <name>Key Mapping Event 11</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>612</id>
-      <name>Key Mappint Event 12</name>
+      <name>Key Mapping Event 12</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>613</id>
-      <name>Key Mappint Event 13</name>
+      <name>Key Mapping Event 13</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>614</id>
-      <name>Key Mappint Event 14</name>
+      <name>Key Mapping Event 14</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>615</id>
-      <name>Key Mappint Event 15</name>
+      <name>Key Mapping Event 15</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>616</id>
-      <name>Key Mappint Event 16</name>
+      <name>Key Mapping Event 16</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>617</id>
-      <name>Key Mappint Event 17</name>
+      <name>Key Mapping Event 17</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>618</id>
-      <name>Key Mappint Event 18</name>
+      <name>Key Mapping Event 18</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>619</id>
-      <name>Key Mappint Event 19</name>
+      <name>Key Mapping Event 19</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>620</id>
-      <name>Key Mappint Event 20</name>
+      <name>Key Mapping Event 20</name>
       <description>Key Mapping Event</description>
     </event>
   </events>

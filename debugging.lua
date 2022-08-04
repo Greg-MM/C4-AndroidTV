@@ -1,11 +1,6 @@
 --[DEBUGGING HELPER FUNCTIONS]--
 DebugTimerID	= 0
---(Property["Debug Mode"] == "OFF") then
---ebugPrint	= false
---se
-	DebugPrint	= true
---d
---C4:UpdateProperty("Debug Mode", "ON")
+DebugPrint		= false
 
 function StartDebugTimer()
 	if (g_DebugTimer) then

@@ -10,6 +10,22 @@ EventID_CurrentAppChanged = 1
 EX_CMD		= {}
 LUA_ACTION	= {}
 
+function OnDriverInit(driverInitType)
+	for k,v in pairs(Properties) do
+		OnPropertyChanged(k)
+	end
+	C4:AddVariable("CURRENT_APP", "", "STRING")
+
+	if (driverInitType == "DIT_ADDING") then
+	-- Initialization needed only when the driver is added to a project
+	elseif (driverInitType == "DIT_STARTUP") then
+	-- Initialization needed only during initial startup
+	elseif (driverInitType == "DIT_UPDATING") then
+	-- Initialization needed only after a driver update
+	end
+end
+
+
 function ExecuteCommand(strCommand, tQueryParams)
 	DebugHeader("ExecuteCommand(" .. strCommand .. ")")
 	Debug(tQueryParams)
@@ -196,9 +212,9 @@ function ProcessInputCommand(CMD, tParams)
 		return ProcessInputCommandKey(tonumber(Properties["0 Mapping"]), CMD, tParams)
 		
 	elseif (CMD == "STAR" or CMD == "START_STAR" or CMD == "PULSE_STAR" or CMD == "STOP_STAR" or CMD == "END_STAR") then
-		return ProcessInputCommandKey(tonumber(Properties["STAR Mapping"]), CMD, tParams)
+		return ProcessInputCommandKey(tonumber(Properties["* Mapping"]), CMD, tParams)
 	elseif (CMD == "POUND" or CMD == "START_POUND" or CMD == "PULSE_POUND" or CMD == "STOP_POUND" or CMD == "END_POUND") then
-		return ProcessInputCommandKey(tonumber(Properties["POUND Mapping"]), CMD, tParams)
+		return ProcessInputCommandKey(tonumber(Properties["# Mapping"]), CMD, tParams)
 	elseif (CMD == "TV_VIDEO" or CMD == "START_TV_VIDEO" or CMD == "PULSE_TV_VIDEO" or CMD == "STOP_TV_VIDEO" or CMD == "END_TV_VIDEO") then
 		return ProcessInputCommandKey(tonumber(Properties["TV_VIDEO Mapping"]), CMD, tParams)
 	elseif (CMD == "CLOSED_CAPTIONED" or CMD == "START_CLOSED_CAPTIONED" or CMD == "PULSE_CLOSED_CAPTIONED" or CMD == "STOP_CLOSED_CAPTIONED" or CMD == "END_CLOSED_CAPTIONED") then
@@ -218,6 +234,9 @@ function ProcessInputCommandKey(KeyCode, CMD, tParams)
 		if(URL ~= "") then
 			SendURL(URL)
 		end
+	elseif(KeyCode >= 601 and KeyCode <= 620) then
+		--Fire Event
+		C4:FireEventByID(KeyCode)
 	end
 	
 	if(HasBegin) then
@@ -292,8 +311,10 @@ function ProcessNetworkMessage(Message)
 		
 	elseif(FingerPrint == "[F20][F1][F12][WT2]") then
 		Debug("CURRENT APP")
-		Debug("Current App: " .. WireMessage[20][1][12].Value)
-		C4:UpdateProperty("Current App", WireMessage[20][1][12].Value)
+		local CurrentApp = WireMessage[20][1][12].Value
+		Debug("Current App: " .. CurrentApp)
+		C4:UpdateProperty("Current App", CurrentApp)
+		C4:SetVariable("CURRENT_APP", CurrentApp)
 		C4:FireEventByID(EventID_CurrentAppChanged) -- CurrentAppChanged
 		
 	elseif(FingerPrint == "[F1][F1][WT0][F2][F1][WT2][F2][WT2][F3][WT0][F4][WT2][F5][WT2][F6][WT2]") then
@@ -453,6 +474,7 @@ end
 
 C4:UpdateProperty("Driver Version", DriverVersion)
 Debug("Driver Loaded...")
+
 if(string.len(Properties["Device Public Key Modulus"]) > 0) then
 	LUA_ACTION.ConnectToCommand(nil)
 end
