@@ -4,7 +4,7 @@ require "helpers"
 require "protobuf"
 require "pairing"
 
-local DriverVersion = "1.0.0"
+local DriverVersion = "1.0.1"
 EventID_CurrentAppChanged = 1
 
 EX_CMD		= {}
@@ -101,6 +101,10 @@ end
 function ReceivedFromProxy(BindingID, strCommand, tParams)
 	DebugHeader("ReceivedFromProxy (" .. BindingID .. "): " .. strCommand)
 	if (tParams ~= nil) then	Debug(tParams)	end
+	if(Properties["Connection"] == "OFFLINE") then
+			Debug("Connection OFFLINE, Attempting To Connect...")
+			LUA_ACTION.ConnectToCommand(nil)
+	end
 
 	if (BindingID == 5001) then
 		if (strCommand == "ON") then
