@@ -747,7 +747,7 @@
               <number>6466</number>
               <auto_connect>False</auto_connect>
               <monitor_connection>False</monitor_connection>
-              <keep_connection>False</keep_connection>
+              <keep_connection>True</keep_connection>
               <certificate>./AndroidTV.p12</certificate>
               <private_key protected="True">./AndroidTV.p12</private_key>
               <verify_mode>none</verify_mode>
