@@ -5,7 +5,7 @@
   <model>AndroidTV</model>
   <creator>Greg Moerler</creator>
   <created>08/01/2022 12:00 PM</created>
-  <modified>08/03/2022 9:54 PM</modified>
+  <modified>08/07/2022 4:20 PM</modified>
   <version>2</version>
   <control>lua_gen</control>
   <driver>DriverWorks</driver>
@@ -242,300 +242,307 @@
         <type>LABEL</type>
         <default>Key Mapping</default>
       </property>
+	  <property>
+        <name>LONG_PRESS_TIME</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>5000</maximum>
+        <default>550</default>
+		<description>Time (ms) between press and release for a long press</description>
+      </property>
       <property>
         <name>GUIDE Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
-        <default>172</default>
+        <maximum>5000</maximum>
+        <default>170</default>
       </property>
       <property>
         <name>PAGE UP Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>92</default>
       </property>
       <property>
         <name>PAGE DOWN Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>93</default>
       </property>
       <property>
         <name>UP Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>19</default>
       </property>
       <property>
         <name>DOWN Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>20</default>
       </property>
       <property>
         <name>LEFT Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>21</default>
       </property>
       <property>
         <name>RIGHT Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>22</default>
       </property>
       <property>
         <name>ENTER Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>23</default>
       </property>
       <property>
         <name>PREVIOUS CHANNEL Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>229</default>
       </property>
       <property>
         <name>CHANNEL UP Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>166</default>
       </property>
       <property>
         <name>CHANNEL DOWN Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>167</default>
       </property>
       <property>
         <name>INFO Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>165</default>
       </property>
       <property>
         <name>MENU Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
-        <default>82</default>
+        <maximum>5000</maximum>
+        <default>3</default>
       </property>
       <property>
         <name>CANCEL Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>4</default>
       </property>
       <property>
         <name>DVR Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>173</default>
       </property>
       <property>
         <name>REWIND Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>89</default>
       </property>
       <property>
         <name>FAST FORWARD Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>90</default>
       </property>
       <property>
         <name>SKIP BACKWARD Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>273</default>
       </property>
       <property>
         <name>SKIP FORWARD Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>272</default>
       </property>
       <property>
         <name>PLAY Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>126</default>
       </property>
       <property>
         <name>PAUSE Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>127</default>
       </property>
       <property>
         <name>PAUSE_ROOM_OFF Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>127</default>
-        <tooltip>Testing Tool Tip</tooltip>
-        <description>Key Mapping used when 'On Room OFF' is 'PAUSE', should be discrete and not a play/pause toggle like you might want for the normal button</description>
+        <description>Used when 'On Room OFF' is 'PAUSE', should be discreet and not a play/pause toggle</description>
       </property>
       <property>
         <name>RECORD Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>130</default>
       </property>
       <property>
         <name>STOP Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>86</default>
       </property>
       <property>
         <name>RED Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>183</default>
       </property>
       <property>
         <name>GREEN Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>184</default>
       </property>
       <property>
         <name>YELLOW Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>185</default>
       </property>
       <property>
         <name>BLUE Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>186</default>
       </property>
       <property>
         <name>1 Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>8</default>
       </property>
       <property>
         <name>2 Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>9</default>
       </property>
       <property>
         <name>3 Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>10</default>
       </property>
       <property>
         <name>4 Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>11</default>
       </property>
       <property>
         <name>5 Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>12</default>
       </property>
       <property>
         <name>6 Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>13</default>
       </property>
       <property>
         <name>7 Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>14</default>
       </property>
       <property>
         <name>8 Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>15</default>
       </property>
       <property>
         <name>9 Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>16</default>
       </property>
       <property>
         <name>0 Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>7</default>
       </property>
       <property>
         <name>* Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>17</default>
       </property>
       <property>
         <name># Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>18</default>
       </property>
       <property>
         <name>INPUT Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>0</default>
       </property>
       <property>
         <name>CLOSED CAPTIONING Mapping</name>
         <type>RANGED_INTEGER</type>
         <minimum>0</minimum>
-        <maximum>1000</maximum>
+        <maximum>5000</maximum>
         <default>175</default>
       </property>
     </properties>
@@ -545,6 +552,10 @@
     <power_command_delay>0</power_command_delay>
     <power_command_needed>True</power_command_needed>
     <actions>
+      <action>
+        <name>Backup Configuration (Copy/Paste in LUA tab)</name>
+        <command>BackupConfiguration</command>
+      </action>
       <action>
         <name>Test Command URL</name>
         <command>TestURL</command>
@@ -565,7 +576,7 @@
             <type>RANGED_INTEGER</type>
             <default>0</default>
             <minimum>0</minimum>
-            <maximum>1000</maximum>
+            <maximum>5000</maximum>
           </param>
         </params>
       </action>
@@ -578,7 +589,7 @@
             <type>RANGED_INTEGER</type>
             <default>0</default>
             <minimum>0</minimum>
-            <maximum>1000</maximum>
+            <maximum>5000</maximum>
           </param>
         </params>
       </action>
@@ -623,102 +634,102 @@
     </event>
     <event>
       <id>601</id>
-      <name>Key Mapping Event 01</name>
+      <name>Key Mappint Event 1</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>602</id>
-      <name>Key Mapping Event 02</name>
+      <name>Key Mappint Event 2</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>603</id>
-      <name>Key Mapping Event 03</name>
+      <name>Key Mappint Event 3</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>604</id>
-      <name>Key Mapping Event 04</name>
+      <name>Key Mappint Event 4</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>605</id>
-      <name>Key Mapping Event 05</name>
+      <name>Key Mappint Event 5</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>606</id>
-      <name>Key Mapping Event 06</name>
+      <name>Key Mappint Event 6</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>607</id>
-      <name>Key Mapping Event 07</name>
+      <name>Key Mappint Event 7</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>608</id>
-      <name>Key Mapping Event 08</name>
+      <name>Key Mappint Event 8</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>609</id>
-      <name>Key Mapping Event 09</name>
+      <name>Key Mappint Event 9</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>610</id>
-      <name>Key Mapping Event 10</name>
+      <name>Key Mappint Event 10</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>611</id>
-      <name>Key Mapping Event 11</name>
+      <name>Key Mappint Event 11</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>612</id>
-      <name>Key Mapping Event 12</name>
+      <name>Key Mappint Event 12</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>613</id>
-      <name>Key Mapping Event 13</name>
+      <name>Key Mappint Event 13</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>614</id>
-      <name>Key Mapping Event 14</name>
+      <name>Key Mappint Event 14</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>615</id>
-      <name>Key Mapping Event 15</name>
+      <name>Key Mappint Event 15</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>616</id>
-      <name>Key Mapping Event 16</name>
+      <name>Key Mappint Event 16</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>617</id>
-      <name>Key Mapping Event 17</name>
+      <name>Key Mappint Event 17</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>618</id>
-      <name>Key Mapping Event 18</name>
+      <name>Key Mappint Event 18</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>619</id>
-      <name>Key Mapping Event 19</name>
+      <name>Key Mappint Event 19</name>
       <description>Key Mapping Event</description>
     </event>
     <event>
       <id>620</id>
-      <name>Key Mapping Event 20</name>
+      <name>Key Mappint Event 20</name>
       <description>Key Mapping Event</description>
     </event>
   </events>

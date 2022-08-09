@@ -4,7 +4,7 @@ require "helpers"
 require "protobuf"
 require "pairing"
 
-local DriverVersion = "1.0.1"
+local DriverVersion = "1.0.2"
 EventID_CurrentAppChanged = 1
 
 EX_CMD		= {}
@@ -81,8 +81,13 @@ function OnPropertyChanged(strProperty)
 	end
 end
 
+function OnBindingChanged (idBinding, strClass, bIsBound, otherDeviceID, otherBindingID)
+	DebugHeader("OnBindingChanged(" .. idBinding .. ", " .. strClass .. ", " .. tostring(bIsBound) .. ", " .. otherDeviceID .. ", " .. otherBindingID .. ")")
+end
+
+
 function OnTimerExpired(TimerID)
-	Debug("OnTimerExpired: " .. TimerID)
+	DebugHeader("OnTimerExpired: " .. TimerID)
 	
 	if (TimerID == DebugTimerID) then
 		Debug("Turning Debug Mode OFF")
@@ -238,9 +243,26 @@ function ProcessInputCommandKey(KeyCode, CMD, tParams)
 		if(URL ~= "") then
 			SendURL(URL)
 		end
+		return
 	elseif(KeyCode >= 601 and KeyCode <= 620) then
 		--Fire Event
 		C4:FireEventByID(KeyCode)
+		return
+	elseif(KeyCode >= 1000 and KeyCode < 2000) then
+		--Long Press
+		local LongPressKeyCode = (KeyCode - 1000)
+		local LongPressTime = tonumber(Properties["LONG_PRESS_TIME"])
+		
+		if(HasBegin or CMD:find("START_")) then return end
+		
+		Debug("LONG PRESS: " .. LongPressKeyCode)
+		SendKey_PRESS(LongPressKeyCode)
+		
+		C4:SetTimer(LongPressTime,	function(timer)
+																	Debug("LONG PRESS RELEASED: " .. LongPressKeyCode)
+																	SendKey_RELEASE(LongPressKeyCode)
+																end)
+		return
 	end
 	
 	if(HasBegin) then
@@ -468,6 +490,13 @@ function LUA_ACTION.TestKeyCodePressThenRelease(tQueryParams)
 	print("Sending KeyCode Press Then Release (" .. tQueryParams.KeyCode .. ")...")
 	SendKey_PRESS_AND_RELEASE(tonumber(tQueryParams.KeyCode))
 end
+
+function LUA_ACTION.BackupConfiguration(tQueryParams)
+	print("--[[ BEGIN CONFIGURATION BACKUP ]]--")
+	BackupConfiguration()
+	print("--[[ END CONFIGURATION BACKUP ]]--")
+end
+
 
 
 

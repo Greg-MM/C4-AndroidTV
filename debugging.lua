@@ -88,3 +88,37 @@ function DebugDivider(DividerChar)
 		print(string.rep(DividerChar, 50))
 	end
 end
+
+-- Generates LUA thay can be pasted in another instance to copy configuration
+-- The device specific (Public Key & Exponent) are commented out by default
+function BackupConfiguration()
+	for k, v in pairs(Properties) do
+		repeat
+			if(k == "Power Status")					then break end
+			if(k == "Debug Mode")						then break end
+			if(k == "Connection")						then break end
+			if(k == "Current App")					then break end
+			if(k == "Device App Version")		then break end
+			if(k == "Device Package Name")	then break end
+			if(k == "Model Name")						then break end
+			if(k == "Driver Version")				then break end
+			if(k == "Vendor Name")					then break end
+			if(k:find("Header"))						then break end
+
+			local PropertySetLine = ""
+			if(k:find("Device Public Key")) then PropertySetLine = "--" end
+
+			if (type(v) == "number") then
+				PropertySetLine = PropertySetLine .. "C4:UpdateProperty(\"" .. k .. "\", " .. Properties[k] .. ")"
+			elseif (type(v) == "string") then
+				if(v ~= nil and v~="") then
+					PropertySetLine = PropertySetLine .. "C4:UpdateProperty(\"" .. k .. "\", \"" .. Properties[k] .. "\")"
+				end
+			end
+			
+			if(PropertySetLine ~= "") then
+					 print(PropertySetLine)
+			end
+		until true
+	end
+end
