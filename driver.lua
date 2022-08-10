@@ -4,7 +4,7 @@ require "helpers"
 require "protobuf"
 require "pairing"
 
-local DriverVersion = "1.0.2"
+local DriverVersion = "1.0.3"
 EventID_CurrentAppChanged = 1
 
 EX_CMD		= {}
@@ -113,6 +113,9 @@ function ReceivedFromProxy(BindingID, strCommand, tParams)
 
 	if (BindingID == 5001) then
 		if (strCommand == "ON") then
+			if (Properties["Send WOL on ON"] == "True") then
+				SendMagicPacket()
+			end
 			if (Properties["Power Status"] == "OFF") then
 				SendKey(KEYCODE_POWER)
 			end
@@ -228,6 +231,13 @@ function ProcessInputCommand(CMD, tParams)
 		return ProcessInputCommandKey(tonumber(Properties["TV_VIDEO Mapping"]), CMD, tParams)
 	elseif (CMD == "CLOSED_CAPTIONED" or CMD == "START_CLOSED_CAPTIONED" or CMD == "PULSE_CLOSED_CAPTIONED" or CMD == "STOP_CLOSED_CAPTIONED" or CMD == "END_CLOSED_CAPTIONED") then
 		return ProcessInputCommandKey(tonumber(Properties["CLOSED_CAPTIONED Mapping"]), CMD, tParams)
+	
+	elseif (CMD == "CUSTOM_1" or CMD == "START_CUSTOM_1" or CMD == "PULSE_CUSTOM_1" or CMD == "STOP_CUSTOM_1" or CMD == "END_CUSTOM_1") then
+		return ProcessInputCommandKey(tonumber(Properties["CUSTOM_1 Mapping"]), CMD, tParams)
+	elseif (CMD == "CUSTOM_2" or CMD == "START_CUSTOM_2" or CMD == "PULSE_CUSTOM_2" or CMD == "STOP_CUSTOM_2" or CMD == "END_CUSTOM_2") then
+		return ProcessInputCommandKey(tonumber(Properties["CUSTOM_2 Mapping"]), CMD, tParams)
+	elseif (CMD == "CUSTOM_3" or CMD == "START_CUSTOM_3" or CMD == "PULSE_CUSTOM_3" or CMD == "STOP_CUSTOM_3" or CMD == "END_CUSTOM_3") then
+		return ProcessInputCommandKey(tonumber(Properties["CUSTOM_3 Mapping"]), CMD, tParams)
 	end
 	return false
 end
@@ -236,6 +246,11 @@ function ProcessInputCommandKey(KeyCode, CMD, tParams)
 	HasBegin = false
 	Debug("ProcessInputCommandKey(" .. KeyCode .. ", " .. CMD .. ")")
 	if(tParams ~= nil and tParams.BEGIN ~= nil) then HasBegin = true end
+	
+	if(KeyCode == 0) then
+		Debug("NO KEY MAPPING DEFINED")
+		return
+	end
 	
 	if(KeyCode >= 501 and KeyCode <= 520) then
 		--Launch App
@@ -295,6 +310,9 @@ function OnConnectionStatusChanged(BindingID, nPort, strStatus)
 		if(nPort == 6467) then
 			Pairing_SendRequest()
 		end
+		
+		local MAC = C4:GetDeviceMAC(6001)
+		C4:UpdateProperty("MAC Address", MAC)
 	end
 	if(nPort == 6466) then
 			C4:UpdateProperty("Connection", strStatus)
@@ -497,8 +515,20 @@ function LUA_ACTION.BackupConfiguration(tQueryParams)
 	print("--[[ END CONFIGURATION BACKUP ]]--")
 end
 
+function LUA_ACTION.SendWOL(tQueryParams)
+	print("Sending Magic Packet...")
+	SendMagicPacket()
+end
 
-
+function SendMagicPacket()
+	print("Sending Magic Packet...")
+	local MAC = Properties["MAC Address"]
+	if (MAC ~= "" and MAC ~= "?") then
+		local RawMAC = string.gsub(MAC, ":", "") -- replace : with "" in mac address
+		Debug("Sending Magic Packet to " .. RawMAC)
+		C4:SendWOL(RawMAC)
+	end
+end
 
 function GetPrivateKeyPassword(Binding, Port)
 	--Open Source, Key is not secret, might look into generating a self signed certificate in driver

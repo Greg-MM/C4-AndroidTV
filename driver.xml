@@ -6,7 +6,7 @@
   <creator>Greg Moerler</creator>
   <created>08/01/2022 12:00 PM</created>
   <modified>08/07/2022 4:20 PM</modified>
-  <version>2</version>
+  <version>3</version>
   <control>lua_gen</control>
   <driver>DriverWorks</driver>
   <small image_source="c4z">icons/device_sm.png</small>
@@ -79,6 +79,12 @@
         <default>?</default>
         <readonly>true</readonly>
       </property>
+	  <property>
+        <name>MAC Address</name>
+        <type>STRING</type>
+        <default>?</default>
+        <readonly>true</readonly>
+      </property>
       <property>
         <name>Device Public Key Modulus</name>
         <type>STRING</type>
@@ -91,6 +97,16 @@
         <default>65537</default>
         <minimum>0</minimum>
         <maximum>65537</maximum>
+      </property>
+	  <property>
+        <name>Send WOL on ON</name>
+        <type>LIST</type>
+        <items>
+          <item>True</item>
+          <item>False</item>
+        </items>
+        <default>True</default>
+        <readonly>false</readonly>
       </property>
       <property>
         <name>On Room OFF</name>
@@ -545,6 +561,27 @@
         <maximum>5000</maximum>
         <default>175</default>
       </property>
+	  <property>
+        <name>CUSTOM_1 Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>5000</maximum>
+        <default>0</default>
+      </property>
+	  <property>
+        <name>CUSTOM_2 Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>5000</maximum>
+        <default>0</default>
+      </property>
+	  <property>
+        <name>CUSTOM_3 Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>5000</maximum>
+        <default>0</default>
+      </property>
     </properties>
     <documentation file="www/documentation.rtf"></documentation>
     <power_management_method>DiscreteCodes</power_management_method>
@@ -555,6 +592,10 @@
       <action>
         <name>Backup Configuration (Copy/Paste in LUA tab)</name>
         <command>BackupConfiguration</command>
+      </action>
+	  <action>
+        <name>Send WOL</name>
+        <command>SendWOL</command>
       </action>
       <action>
         <name>Test Command URL</name>
