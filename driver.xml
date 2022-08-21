@@ -6,7 +6,7 @@
   <creator>Greg Moerler</creator>
   <created>08/01/2022 12:00 PM</created>
   <modified>08/07/2022 4:20 PM</modified>
-  <version>3</version>
+  <version>4</version>
   <control>lua_gen</control>
   <driver>DriverWorks</driver>
   <small image_source="c4z">icons/device_sm.png</small>
@@ -114,6 +114,7 @@
         <items>
           <item>Do Nothing</item>
           <item>Pause</item>
+		  <item>Turn OFF</item>
         </items>
         <default>Do Nothing</default>
         <readonly>false</readonly>
@@ -264,7 +265,14 @@
         <minimum>0</minimum>
         <maximum>5000</maximum>
         <default>550</default>
-		<description>Time (ms) between press and release for a long press</description>
+		<description>Time (ms) between press and release for a long press (used for 1XXX mappings)</description>
+      </property>
+	  <property>
+        <name>POWER Mapping</name>
+        <type>RANGED_INTEGER</type>
+        <minimum>0</minimum>
+        <maximum>5000</maximum>
+        <default>26</default>
       </property>
       <property>
         <name>GUIDE Mapping</name>
@@ -419,7 +427,7 @@
         <minimum>0</minimum>
         <maximum>5000</maximum>
         <default>127</default>
-        <description>Used when 'On Room OFF' is 'PAUSE', should be discreet and not a play/pause toggle</description>
+        <description>Used when 'On Room OFF' is 'Pause', should be discreet and not a play/pause toggle</description>
       </property>
       <property>
         <name>RECORD Mapping</name>

@@ -4,7 +4,7 @@ require "helpers"
 require "protobuf"
 require "pairing"
 
-local DriverVersion = "1.0.3"
+local DriverVersion = "1.0.4"
 EventID_CurrentAppChanged = 1
 
 EX_CMD		= {}
@@ -15,6 +15,9 @@ function OnDriverInit(driverInitType)
 		OnPropertyChanged(k)
 	end
 	C4:AddVariable("CURRENT_APP", "", "STRING")
+	
+	local RoomID = C4:RoomGetId()
+	C4:RegisterVariableListener(RoomID, 1000) -- Current_Selected_Device
 
 	if (driverInitType == "DIT_ADDING") then
 	-- Initialization needed only when the driver is added to a project
@@ -93,14 +96,53 @@ function OnTimerExpired(TimerID)
 		Debug("Turning Debug Mode OFF")
 		C4:UpdateProperty("Debug Mode", "OFF")
 		DebugTimerID = C4:KillTimer(TimerID)
+	elseif(TimerID == PingTimerID) then
+		--Debug("Ping Timer")
+		ExecutePingTimer()
 	else
 		Debug("Unknown Timer: " .. TimerID)
 		C4:KillTimer(TimerID)
 	end
 end
 
+function GetVariableName(DeviceID, VariableID)
+	for k,v in pairs(C4:GetDeviceVariables(DeviceID)) do
+		if(k == VariableID) then
+			return v.name 
+		end
+	end
+	return ""
+end
 
-
+function OnWatchedVariableChanged(DeviceID, VariableID, strValue) 
+	DebugHeader("OnWatchedVariableChanged")
+	Debug("• Device: " .. DeviceID)
+	Debug("• Variable ID: " .. VariableID)
+	
+	if(DebugPrint) then -- do not call GetVariableName if not showing (not the fastest function)
+		Debug("• Variable Name: " .. GetVariableName(tonumber(DeviceID), VariableID))
+	end
+	
+	Debug("• Value: " .. strValue) 
+	DebugDivider("-")
+	
+	local SwitchedToDeviceID = tonumber(strValue)
+	
+	if(VariableID == 1000) then		
+			if(SwitchedToDeviceID == C4:GetDeviceID() or SwitchedToDeviceID == C4:GetProxyDevices()) then
+				Debug("Switched To Android TV Device, DO NOTHING")
+			else
+				if (Properties["On Room OFF"] == "Pause") then
+					Debug("Switched AWAY from Android TV Device, PAUSE")
+					SendKey(tonumber(Properties["PAUSE_ROOM_OFF Mapping"]))
+				else
+					Debug("Switched AWAY from Android TV Device, PAUSE NOT ENABLED, DO NOTHING")
+				end
+				
+			end
+	end
+	
+end 
 
 
 function ReceivedFromProxy(BindingID, strCommand, tParams)
@@ -117,12 +159,18 @@ function ReceivedFromProxy(BindingID, strCommand, tParams)
 				SendMagicPacket()
 			end
 			if (Properties["Power Status"] == "OFF") then
-				SendKey(KEYCODE_POWER)
+				SendKey(tonumber(Properties["POWER Mapping"]))
 			end
+			
 		elseif (strCommand == "OFF") then
-			if (Properties["On Room Off"] == "Pause") then
+			if (Properties["On Room OFF"] == "Pause") then
 				SendKey(tonumber(Properties["PAUSE_ROOM_OFF Mapping"]))
+			elseif (Properties["On Room OFF"] == "Turn OFF") then
+				if (Properties["Power Status"] == "ON") then
+					SendKey(tonumber(Properties["POWER Mapping"]))
+				end
 			end
+		
 		else
 			if (ProcessInputCommand(strCommand, tParams) == false) then
 				DebugDivider("!")
@@ -335,7 +383,26 @@ end
 
 
 
+PingRequestCount = 0
+PingTimerID = 0
 
+function StartPingTimer()	
+	if (PingTimerID ~= 0) then
+		PingTimerID = C4:KillTimer(PingTimerID)
+	end
+		PingTimerID = C4:AddTimer(60, "SECONDS", true)
+end
+
+function ExecutePingTimer()
+	--Debug("Ping Request Count: " .. PingRequestCount)
+	if(string.len(Properties["Device Public Key Modulus"]) > 0 and PingRequestCount == 0) then
+		Debug("Communication Failed, attempting to connect...")
+		LUA_ACTION.DisconnectFromCommand(nil)
+		LUA_ACTION.ConnectToCommand(nil)
+	end
+	
+	PingRequestCount = 0
+end
 
 
 function ProcessNetworkMessage(Message)
@@ -350,9 +417,9 @@ function ProcessNetworkMessage(Message)
 	end
 		
 	if(FingerPrint == "[F8][F1][WT0][F2][WT0]") then -- Ping Request
+		PingRequestCount = PingRequestCount + 1
 		local PingRequestNumber = WireMessage[8][1].Value
 		SendWireCommand({[9]={[1]={ID=1, WireType=WireType_VarInt, Value=PingRequestNumber}}})
-		
 	elseif(FingerPrint == "[F20][F1][F12][WT2]") then
 		Debug("CURRENT APP")
 		local CurrentApp = WireMessage[20][1][12].Value
@@ -485,6 +552,7 @@ end
 function LUA_ACTION.ConnectToCommand(tQueryParams)
 	Debug("Connecting To Command Interface...")
 	C4:NetConnect(6001, 6466)
+	StartPingTimer()
 end
 
 function LUA_ACTION.DisconnectFromCommand(tQueryParams)
@@ -510,9 +578,7 @@ function LUA_ACTION.TestKeyCodePressThenRelease(tQueryParams)
 end
 
 function LUA_ACTION.BackupConfiguration(tQueryParams)
-	print("--[[ BEGIN CONFIGURATION BACKUP ]]--")
 	BackupConfiguration()
-	print("--[[ END CONFIGURATION BACKUP ]]--")
 end
 
 function LUA_ACTION.SendWOL(tQueryParams)

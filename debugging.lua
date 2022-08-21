@@ -3,10 +3,10 @@ DebugTimerID	= 0
 DebugPrint		= false
 
 function StartDebugTimer()
-	if (g_DebugTimer) then
-		g_DebugTimer = C4:KillTimer(g_DebugTimer)
+	if (DebugTimerID ~= 0) then
+		DebugTimerID = C4:KillTimer(DebugTimerID)
 	end
-	g_DebugTimer = C4:AddTimer(120, "MINUTES")
+		DebugTimerID = C4:AddTimer(120, "MINUTES")
 end
 
 
@@ -89,36 +89,139 @@ function DebugDivider(DividerChar)
 	end
 end
 
+AlreadyExported = ""
 -- Generates LUA thay can be pasted in another instance to copy configuration
 -- The device specific (Public Key & Exponent) are commented out by default
 function BackupConfiguration()
+	AlreadyExported = ""
+	
+	print("--[[ BEGIN CONFIGURATION BACKUP ]]--")
+	print("-- Vendor:		" .. Properties["Vendor Name"])
+	print("-- Model:		" .. Properties["Model Name"])
+	print("-- Version:		" .. Properties["Device Version"])
+	
+	print("-----------------------------")
+	print("-- Launch App URLs")
+	print("-----------------------------")
+	for App = 1, 20, 1
+	do
+		BackupProperty("Launch App URL " .. App)
+	end
+	
+	print("-----------------------------")
+	print("-- Key Mappings")
+	print("-----------------------------")
+	BackupProperty("GUIDE Mapping")
+	BackupProperty("INFO Mapping")
+	BackupProperty("MENU Mapping")
+	BackupProperty("DVR Mapping")
+	
+	BackupProperty("UP Mapping")
+	BackupProperty("DOWN Mapping")
+	BackupProperty("LEFT Mapping")
+	BackupProperty("RIGHT Mapping")
+	BackupProperty("ENTER Mapping")
+	BackupProperty("CANCEL Mapping")
+		
+	BackupProperty("CUSTOM_1 Mapping")
+	BackupProperty("CUSTOM_2 Mapping")
+	BackupProperty("CUSTOM_3 Mapping")
+	
+	BackupProperty("PREVIOUS CHANNEL Mapping")
+	BackupProperty("CHANNEL UP Mapping")
+	BackupProperty("CHANNEL DOWN Mapping")
+
+	BackupProperty("PAUSE_ROOM_OFF Mapping")
+	
+	BackupProperty("RECORD Mapping")
+	BackupProperty("REWIND Mapping")
+	BackupProperty("FAST FORWARD Mapping")
+	BackupProperty("SKIP BACKWARD Mapping")
+	BackupProperty("SKIP FORWARD Mapping")
+
+	BackupProperty("PLAY Mapping")
+	BackupProperty("PAUSE Mapping")
+	BackupProperty("STOP Mapping")
+	
+	BackupProperty("RED Mapping")
+	BackupProperty("GREEN Mapping")
+	BackupProperty("YELLOW Mapping")
+	BackupProperty("BLUE Mapping")
+
+	BackupProperty("PAGE UP Mapping")
+	BackupProperty("PAGE DOWN Mapping")
+	
+	BackupProperty("1 Mapping")
+	BackupProperty("2 Mapping")
+	BackupProperty("3 Mapping")
+	BackupProperty("4 Mapping")
+	BackupProperty("5 Mapping")
+	BackupProperty("6 Mapping")
+	BackupProperty("7 Mapping")
+	BackupProperty("8 Mapping")
+	BackupProperty("9 Mapping")
+	BackupProperty("* Mapping")
+	BackupProperty("0 Mapping")
+	BackupProperty("# Mapping")
+	
+	for k, v in pairs(Properties) do
+		if(k:find("Mapping")) then
+			BackupProperty(k)
+		end
+	end
+	
+	print("-----------------------------")
+	print("-- Other Settings")
+	print("-----------------------------")
 	for k, v in pairs(Properties) do
 		repeat
 			if(k == "Power Status")					then break end
 			if(k == "Debug Mode")						then break end
 			if(k == "Connection")						then break end
+			if(k == "MAC Address")					then break end
 			if(k == "Current App")					then break end
 			if(k == "Device App Version")		then break end
+			if(k == "Device Version")				then break end
 			if(k == "Device Package Name")	then break end
 			if(k == "Model Name")						then break end
 			if(k == "Driver Version")				then break end
 			if(k == "Vendor Name")					then break end
 			if(k:find("Header"))						then break end
-
-			local PropertySetLine = ""
-			if(k:find("Device Public Key")) then PropertySetLine = "--" end
-
-			if (type(v) == "number") then
-				PropertySetLine = PropertySetLine .. "C4:UpdateProperty(\"" .. k .. "\", " .. Properties[k] .. ")"
-			elseif (type(v) == "string") then
-				if(v ~= nil and v~="") then
-					PropertySetLine = PropertySetLine .. "C4:UpdateProperty(\"" .. k .. "\", \"" .. Properties[k] .. "\")"
-				end
-			end
+			if(k:find("Public Key"))				then break end
 			
-			if(PropertySetLine ~= "") then
-					 print(PropertySetLine)
-			end
+			BackupProperty(k)
+			
 		until true
+	end
+	
+	print("-----------------------------")
+	print("-- Device Specific Properties")
+	print("-----------------------------")
+	for k, v in pairs(Properties) do
+		if(k:find("Public Key")) then
+			BackupProperty(k)
+		end
+	end
+	
+	print("--[[ END CONFIGURATION BACKUP ]]--")
+end
+
+function BackupProperty(k)
+	local v = Properties[k]
+	local BackupLine = ""
+	
+	if(k:find("Device Public Key")) then BackupLine = "--" end
+	
+	if (type(v) == "number") then
+		BackupLine = BackupLine .. "C4:UpdateProperty(\"" .. k .. "\", " .. Properties[k] .. ")"
+	elseif (type(v) == "string") then
+		if(v ~= nil and v~="") then
+			BackupLine = BackupLine .. "C4:UpdateProperty(\"" .. k .. "\", \"" .. Properties[k] .. "\")"
+		end
+	end
+	local ExportCheck = "<" .. k:gsub("%*", "STAR") .. ">"
+	if(BackupLine ~= "" and AlreadyExported:find(ExportCheck) == nil) then
+		AlreadyExported = AlreadyExported .. ExportCheck
+		print(BackupLine)
 	end
 end
